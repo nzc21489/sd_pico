@@ -121,7 +121,10 @@ DRESULT disk_write(
 
     if (Stat == 0)
     {
-        sd_writeblocks_async((uint32_t *)buff, sector, count);
+        if (sd_writeblocks_async((uint32_t *)buff, sector, count) != 0)
+        {
+            return RES_ERROR;
+        }
 
         static int timeout = 10;
         int rc;
