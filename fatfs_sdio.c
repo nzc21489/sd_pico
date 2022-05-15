@@ -82,6 +82,8 @@ DRESULT disk_read(
         return STA_NOINIT;
     }
 
+    sd_set_clock_divider(3);
+
     if (Stat == 0)
     {
         for (int i = 0; i < count; i++)
@@ -119,6 +121,8 @@ DRESULT disk_write(
         return STA_NOINIT;
     }
 
+    sd_set_clock_divider(30);
+    
     if (Stat == 0)
     {
         if (sd_writeblocks_async((uint32_t *)buff, sector, count) != 0)
